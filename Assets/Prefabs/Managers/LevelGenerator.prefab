@@ -49,8 +49,11 @@ MonoBehaviour:
     probability: 0.75
     scaleVariation: {x: 0.5, y: 1.5}
   - prefab: {fileID: 5301729608292732899, guid: f98be946523b819468d0170ee6a54172, type: 3}
-    probability: 0.25
+    probability: 0.125
+    scaleVariation: {x: 1, y: 1}
+  - prefab: {fileID: 5301729608292732899, guid: 5963413859ae50a43a8d81150e60b83f, type: 3}
+    probability: 0.125
     scaleVariation: {x: 1, y: 1}
   instanceDensity: 0.5
-  minRadius: 100
+  minRadius: 50
   maxRadius: 2000

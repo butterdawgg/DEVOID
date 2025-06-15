@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 100
   projectileSpread: 1
-  projectileRange: 500
-  projectileDamage: 10
+  projectileRange: 300
+  projectileDamage: 5
   projectileCount: 1
   projectileSplashRadius: 0
   cooldown: 0.1

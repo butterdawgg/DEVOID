@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.VFX;
 
 public abstract class Enemy : MonoBehaviour
@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private VisualEffect deathVFX;
     [SerializeField] private GameObject[] destroyOnDeath;
+    [SerializeField] private float respawnTime;
     [Header("Guns")]
     [SerializeField] private Transform[] hardpoints;
     [SerializeField] private Gun gunPrefab;
@@ -22,7 +23,7 @@ public abstract class Enemy : MonoBehaviour
 
     public float HealthFraction { get { return health / maxHealth; } }
     public bool IsDead { get { return isDead; } }
-    protected bool IsAggroed {  get { return isAggroed; } }
+    public bool IsAggroed {  get { return isAggroed; } }
     public string Name { get { return enemyName; } }
 
     private float health;
@@ -32,9 +33,17 @@ public abstract class Enemy : MonoBehaviour
 
     private bool isAggroed = false;
 
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+
+    private float deathTime;
+
     private void Awake()
     {
         health = maxHealth;
+
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
 
         foreach (Transform hardpoint in hardpoints)
         {
@@ -46,6 +55,19 @@ public abstract class Enemy : MonoBehaviour
 
     private void Update()
     {
+        Vector3 dir = Player.Instance.transform.position - transform.position;
+        float dist = dir.magnitude;
+
+        if (dist < GetGunRange())
+        {
+            deathTime = Time.time;
+        }
+
+        if (isDead && (respawnTime < Time.time - deathTime))
+        {
+            OnRespawn();
+        }
+
         if (isDead)
             return;
 
@@ -61,21 +83,16 @@ public abstract class Enemy : MonoBehaviour
         if (health <= 0)
         {
             OnDeath();
-
-            isDead = true;
         }
-
-        Vector3 dir = Player.Instance.transform.position - transform.position;
-        float dist = dir.magnitude;
 
         if (dist < aggroRange && !isAggroed)
         {
-            isAggroed = true;
+            OnAggro();
 
             AlertNearbyEnemies();
         }
 
-        if (dist > Player.Instance.GetGunRange() && isAggroed)
+        if (dist > GetGunRange() && isAggroed)
         {
             isAggroed = false;
         }
@@ -113,10 +130,39 @@ public abstract class Enemy : MonoBehaviour
 
     private void Alert()
     {
+        OnAggro();
+    }
+
+    private void OnAggro()
+    {
         isAggroed = true;
+
+        EnemyTrackerManager.Instance.AddTracker(this);
+    }
+
+    private void OnRespawn()
+    {
+        isDead = false;
+
+        health = maxHealth;
+
+        foreach (GameObject obj in destroyOnDeath)
+        {
+            obj.SetActive(true);
+        }
     }
 
     private void OnDeath()
+    {
+        isDead = true;
+        isAggroed = false;
+
+        deathTime = Time.time;
+
+        StartCoroutine(DeathCoroutine());
+    }
+
+    private IEnumerator DeathCoroutine()
     {
         AudioManager.Instance.PlaySound("Explosion");
         deathVFX.Play();
@@ -125,10 +171,13 @@ public abstract class Enemy : MonoBehaviour
 
         foreach (GameObject obj in destroyOnDeath)
         {
-            Destroy(obj);
+            obj.SetActive(false);
         }
 
-        Destroy(gameObject, 1f);
+        yield return new WaitForSeconds(1f);
+
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
     }
 
     public void TakeDamage(float damage)
@@ -137,6 +186,32 @@ public abstract class Enemy : MonoBehaviour
         isAggroed = true;
 
         AlertNearbyEnemies();
+    }
+
+    protected float GetGunRange()
+    {
+        float range = 0f;
+
+        foreach (Gun gun in guns)
+        {
+            if (gun.GetRange() > range)
+                range = gun.GetRange();
+        }
+
+        return range;
+    }
+
+    protected float GetGunProjectileSpeed()
+    {
+        float projectileSpeed = 0f;
+
+        foreach (Gun gun in guns)
+        {
+            if (gun.GetProjectileSpeed() > projectileSpeed)
+                projectileSpeed = gun.GetProjectileSpeed();
+        }
+
+        return projectileSpeed;
     }
 
     protected abstract void OnUpdate();

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438f3a828bda65942ba15ac000da372d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 1.5
+  size: 2
   obstacleMask:
     serializedVersion: 2
     m_Bits: 8

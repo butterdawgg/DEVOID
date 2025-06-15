@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6864194311798167404}
-  - component: {fileID: 5038651194335679439}
-  m_Layer: 6
-  m_Name: Player_1_Gun
+  - component: {fileID: 6608720908936486741}
+  m_Layer: 7
+  m_Name: EnemyShip_1_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 4459678130019445171}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5038651194335679439
+--- !u!114 &6608720908936486741
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,15 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e01c2a92716b444cbd080c8e0808bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 200
+  projectileSpeed: 100
   projectileSpread: 1
-  projectileRange: 200
-  projectileDamage: 20
+  projectileRange: 300
+  projectileDamage: 5
   projectileCount: 1
   projectileSplashRadius: 0
-  cooldown: 0.1
+  cooldown: 0.15
   angleThreshold: 60
-  projectilePrototype: {fileID: 1557616969882955290, guid: 7af318152c2d8a149b882ca1986529de, type: 3}
+  projectilePrototype: {fileID: 3594971802599416644, guid: 0088fd6e646ec2d4ea8b92b97db55bd9, type: 3}
   muzzlePoint: {fileID: 6739011459229194502}
   muzzleFlashVFX: {fileID: 2178436574188707013}
 --- !u!1 &5591900194462783719
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 4459678130019445171}
   - component: {fileID: 2178436574188707013}
   - component: {fileID: 1787991580371035334}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,12 +132,12 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 47.937256, y: 0, z: 47.937256, w: 1}
+      - m_Value: {x: 47.937256, y: 7.989543, z: 0, w: 1}
         m_Name: FlashColor
-        m_Overridden: 0
-      - m_Value: {x: 47.937256, y: 0, z: 47.937256, w: 1}
+        m_Overridden: 1
+      - m_Value: {x: 47.937256, y: 7.989543, z: 0, w: 1}
         m_Name: ParticleColor
-        m_Overridden: 0
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6739011459229194502}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: MuzzlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

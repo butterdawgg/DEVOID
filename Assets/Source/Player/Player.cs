@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     public static Player Instance { get; private set; }
     public float VelocityFraction { get; private set; }
+    public Vector3 Velocity { get; private set; }
     public float HealthFraction { get; private set; }
     public float ThrustFraction { get; private set; }
     public Enemy Target { get; private set; }
@@ -111,6 +112,8 @@ public class Player : MonoBehaviour
         VelocityFraction = Mathf.InverseLerp(minLinearVelocity,
                                              maxLinearVelocity,
                                              rb.linearVelocity.magnitude);
+
+        Velocity = rb.linearVelocity;
 
         HealthFraction = health / maxHealth;
 

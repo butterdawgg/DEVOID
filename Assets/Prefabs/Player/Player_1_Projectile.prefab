@@ -334,6 +334,9 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 136
+  splashLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &6420445492154603110
 GameObject:
   m_ObjectHideFlags: 0

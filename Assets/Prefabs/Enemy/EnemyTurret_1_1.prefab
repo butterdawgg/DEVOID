@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 8169139797459764116}
   - {fileID: 4321744422974860111}
   - {fileID: 4192926463221489486}
+  respawnTime: 30
   hardpoints:
   - {fileID: 5973244511824209201}
   gunPrefab: {fileID: 6608720908936486741, guid: 8e7f055b74e41344ba62a5913e8cc3db, type: 3}

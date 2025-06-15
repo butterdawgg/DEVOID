@@ -6,6 +6,7 @@ public abstract class Projectile : MonoBehaviour
     [SerializeField] private VisualEffect hitVFX;
     [SerializeField] private GameObject[] destroyOnDeath;
     [SerializeField] protected LayerMask hitMask;
+    [SerializeField] protected LayerMask splashLayerMask;
 
     private float speed;
     private float damage;
@@ -66,12 +67,19 @@ public abstract class Projectile : MonoBehaviour
         float distance = speed * Time.deltaTime;
 
         Ray ray = new(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, distance, hitMask))
-        {
-            transform.position = hitInfo.point;
-            transform.parent = hitInfo.transform;
 
-            OnHit(hitInfo, damage);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo1, distance, hitMask))
+        {
+            transform.position = hitInfo1.point;
+            transform.parent = hitInfo1.transform;
+
+            OnHit(hitInfo1, damage);
+            OnDeath();
+        }
+        else if (Physics.SphereCast(ray.origin, splashRadius * 0.2f,
+            ray.direction, out RaycastHit hitInfo2, distance, splashLayerMask))
+        {
+            OnHit(hitInfo2, damage);
             OnDeath();
         }
         else
