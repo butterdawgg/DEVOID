@@ -52,4 +52,5 @@ MonoBehaviour:
     probability: 0.25
     scaleVariation: {x: 1, y: 1}
   instanceDensity: 0.5
-  radius: 1000
+  minRadius: 100
+  maxRadius: 2000

@@ -65,6 +65,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ca469e0bbbd838a48bd123b3acc17e0c, type: 3}
     volume: 0.5
     source: {fileID: 0}
+  - name: Text1
+    clip: {fileID: 8300000, guid: 358f0cd5633652d40b76baf0290b9577, type: 3}
+    volume: 0.5
+    source: {fileID: 0}
   music:
   - name: soundtrack1
     clip: {fileID: 8300000, guid: 217677281a62ba945bee537c355d60d9, type: 3}

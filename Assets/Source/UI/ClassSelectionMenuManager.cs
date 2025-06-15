@@ -6,7 +6,8 @@ public class ClassSelectionMenuManager : MonoBehaviour
 {
     [SerializeField] private Button[] classSelectionButtons;
     [SerializeField] private GameObject howToPlayMenu;
-    [SerializeField] private Button playConfirmButton;
+    [SerializeField] private GameObject introMenu;
+    [SerializeField] private Button nextButton;
     [SerializeField] private GameObject defaultDescriptionText;
     [SerializeField] private GameObject firstPlayDescriptionText;
 
@@ -17,7 +18,7 @@ public class ClassSelectionMenuManager : MonoBehaviour
             button.onClick.AddListener(OnClassSelectionButtonClick);
         }
 
-        playConfirmButton.onClick.AddListener(OnPlayConfirmButtonClick);
+        nextButton.onClick.AddListener(OnNextButtonClick);
 
         bool isFirstPlay = SerializeManager.GetIsFirstPlay();
 
@@ -25,6 +26,7 @@ public class ClassSelectionMenuManager : MonoBehaviour
         firstPlayDescriptionText.SetActive(isFirstPlay);
 
         howToPlayMenu.SetActive(false);
+        introMenu.SetActive(false);
     }
 
     private void OnClassSelectionButtonClick()
@@ -32,16 +34,19 @@ public class ClassSelectionMenuManager : MonoBehaviour
         if (SerializeManager.GetIsFirstPlay())
         {
             howToPlayMenu.SetActive(true);
+            introMenu.SetActive(false);
+
             return;
         }
 
         howToPlayMenu.SetActive(false);
+        introMenu.SetActive(false);
         gameObject.SetActive(false);
     }
 
-    private void OnPlayConfirmButtonClick()
+    private void OnNextButtonClick()
     {
-        SerializeManager.SetIsFirstPlay(false);
-        SceneManager.LoadScene(1);
+        howToPlayMenu.SetActive(false);
+        introMenu.SetActive(true);
     }
 }
