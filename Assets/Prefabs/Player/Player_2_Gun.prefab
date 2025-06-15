@@ -52,7 +52,7 @@ MonoBehaviour:
   projectileDamage: 100
   projectileCount: 1
   projectileSplashRadius: 10
-  cooldown: 0.5
+  cooldown: 0.4
   angleThreshold: 60
   projectilePrototype: {fileID: 1557616969882955290, guid: 26bf5868937e4344995a97b373ae6a95, type: 3}
   muzzlePoint: {fileID: 6739011459229194502}

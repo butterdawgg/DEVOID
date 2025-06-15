@@ -47,11 +47,11 @@ MonoBehaviour:
   sounds:
   - name: ButtonHover
     clip: {fileID: 8300000, guid: 93b68053288e053478d0ee259febe5bd, type: 3}
-    volume: 0.25
+    volume: 0.1
     source: {fileID: 0}
   - name: ButtonClick
     clip: {fileID: 8300000, guid: 64c8002feb0b3124f988d173946ce215, type: 3}
-    volume: 0.25
+    volume: 0.1
     source: {fileID: 0}
   - name: ProjectileShoot
     clip: {fileID: 8300000, guid: f82636f1e5d1b18418201177bb3e1330, type: 3}
@@ -67,26 +67,26 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Text1
     clip: {fileID: 8300000, guid: 358f0cd5633652d40b76baf0290b9577, type: 3}
-    volume: 0.5
+    volume: 0.25
     source: {fileID: 0}
   music:
   - name: soundtrack1
     clip: {fileID: 8300000, guid: 217677281a62ba945bee537c355d60d9, type: 3}
-    volume: 0.5
+    volume: 1
     source: {fileID: 0}
   - name: soundtrack2
     clip: {fileID: 8300000, guid: 04ae026d59825e34eb2a520627e41f3d, type: 3}
-    volume: 0.5
+    volume: 1
     source: {fileID: 0}
   - name: soundtrack3
     clip: {fileID: 8300000, guid: 4f575c59fbe1fc04eb4b6477d2c47fd0, type: 3}
-    volume: 0.5
+    volume: 1
     source: {fileID: 0}
   - name: soundtrack4
     clip: {fileID: 8300000, guid: bef3a4682fa81df4d967c208cac84a68, type: 3}
-    volume: 0.5
+    volume: 1
     source: {fileID: 0}
   - name: soundtrack5
     clip: {fileID: 8300000, guid: 789aacf64989f744eaddffb718dd4fdd, type: 3}
-    volume: 0.5
+    volume: 1
     source: {fileID: 0}

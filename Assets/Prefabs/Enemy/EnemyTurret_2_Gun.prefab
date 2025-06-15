@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6864194311798167404}
   - component: {fileID: 6608720908936486741}
   m_Layer: 7
-  m_Name: EnemyShip_1_Gun
+  m_Name: EnemyTurret_2_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,15 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e01c2a92716b444cbd080c8e0808bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 100
-  projectileSpread: 1
+  projectileSpeed: 200
+  projectileSpread: 0
   projectileRange: 300
-  projectileDamage: 5
+  projectileDamage: 15
   projectileCount: 1
   projectileSplashRadius: 0
-  cooldown: 0.2
+  cooldown: 0.5
   angleThreshold: 60
-  projectilePrototype: {fileID: 3594971802599416644, guid: 0088fd6e646ec2d4ea8b92b97db55bd9, type: 3}
+  projectilePrototype: {fileID: 3594971802599416644, guid: 4b35009f83417484daf093fa35adcedb, type: 3}
   muzzlePoint: {fileID: 6739011459229194502}
   muzzleFlashVFX: {fileID: 2178436574188707013}
 --- !u!1 &5591900194462783719
@@ -123,7 +123,7 @@ VisualEffect:
       - m_Value: 10
         m_Name: ParticleCount
         m_Overridden: 0
-      - m_Value: 0.5
+      - m_Value: 0.75
         m_Name: SizeMult
         m_Overridden: 1
     m_Vector2f:

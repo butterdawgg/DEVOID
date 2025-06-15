@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -10,6 +11,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private VisualEffect deathVFX;
     [SerializeField] private GameObject[] destroyOnDeath;
     [SerializeField] private float respawnTime;
+    [SerializeField] private bool diesWithParent;
     [Header("Guns")]
     [SerializeField] private Transform[] hardpoints;
     [SerializeField] private Gun gunPrefab;
@@ -25,9 +27,10 @@ public abstract class Enemy : MonoBehaviour
     public bool IsDead { get { return isDead; } }
     public bool IsAggroed {  get { return isAggroed; } }
     public string Name { get { return enemyName; } }
+    public bool RespawnControlledByParent { get { return respawnTime < 0f; } }
 
     private float health;
-    private bool isDead;
+    private bool isDead = false;
 
     private List<Gun> guns = new ();
 
@@ -37,6 +40,8 @@ public abstract class Enemy : MonoBehaviour
     private Quaternion initialRotation;
 
     private float deathTime;
+
+    private Enemy parent;
 
     private void Awake()
     {
@@ -53,17 +58,34 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        parent = transform.parent != null ?
+            transform.parent.GetComponentInParent<Enemy>() : null;
+    }
+
     private void Update()
     {
+        if (parent != null)
+        {
+            if (!isDead && parent.IsDead && diesWithParent)
+            {
+                OnDeath();
+
+                return;
+            }
+        }
+
         Vector3 dir = Player.Instance.transform.position - transform.position;
         float dist = dir.magnitude;
 
-        if (dist < GetGunRange())
+        if (isDead && (dist < GetGunRange()))
         {
             deathTime = Time.time;
         }
 
-        if (isDead && (respawnTime < Time.time - deathTime))
+        if (isDead && (respawnTime < Time.time - deathTime) &&
+            !RespawnControlledByParent)
         {
             OnRespawn();
         }
@@ -140,7 +162,7 @@ public abstract class Enemy : MonoBehaviour
         EnemyTrackerManager.Instance.AddTracker(this);
     }
 
-    private void OnRespawn()
+    public void OnRespawn()
     {
         isDead = false;
 
@@ -149,6 +171,15 @@ public abstract class Enemy : MonoBehaviour
         foreach (GameObject obj in destroyOnDeath)
         {
             obj.SetActive(true);
+        }
+
+        Enemy[] children = GetComponentsInChildren<Enemy>();
+        children = children.Where(e => e != this).ToArray();
+
+        foreach (Enemy child in children)
+        {
+            if (child.IsDead && child.RespawnControlledByParent)
+                child.OnRespawn();
         }
     }
 
@@ -159,11 +190,6 @@ public abstract class Enemy : MonoBehaviour
 
         deathTime = Time.time;
 
-        StartCoroutine(DeathCoroutine());
-    }
-
-    private IEnumerator DeathCoroutine()
-    {
         AudioManager.Instance.PlaySound("Explosion");
         deathVFX.Play();
 
@@ -174,6 +200,11 @@ public abstract class Enemy : MonoBehaviour
             obj.SetActive(false);
         }
 
+        StartCoroutine(DeathCoroutine());
+    }
+
+    private IEnumerator DeathCoroutine()
+    {
         yield return new WaitForSeconds(1f);
 
         transform.position = initialPosition;
@@ -190,15 +221,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected float GetGunRange()
     {
-        float range = 0f;
-
-        foreach (Gun gun in guns)
-        {
-            if (gun.GetRange() > range)
-                range = gun.GetRange();
-        }
-
-        return range;
+        return gunPrefab.GetRange();
     }
 
     protected float GetGunProjectileSpeed()

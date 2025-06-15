@@ -46,14 +46,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - prefab: {fileID: 7722610721207244934, guid: 1a43f9677e418b6498895087b11b2ed2, type: 3}
-    probability: 0.75
-    scaleVariation: {x: 0.5, y: 1.5}
+    probability: 0.2
+    scaleVariation: {x: 0.75, y: 1.25}
+  - prefab: {fileID: 7722610721207244934, guid: 367ff70b4d9bec34c9871f92a9da2416, type: 3}
+    probability: 0.2
+    scaleVariation: {x: 0.75, y: 1.25}
+  - prefab: {fileID: 7722610721207244934, guid: 50ebdefa75f4f404ea4ad6f373b2bfbd, type: 3}
+    probability: 0.2
+    scaleVariation: {x: 0.75, y: 1.25}
   - prefab: {fileID: 5301729608292732899, guid: f98be946523b819468d0170ee6a54172, type: 3}
-    probability: 0.125
+    probability: 0.2
     scaleVariation: {x: 1, y: 1}
-  - prefab: {fileID: 5301729608292732899, guid: 5963413859ae50a43a8d81150e60b83f, type: 3}
-    probability: 0.125
+  - prefab: {fileID: 7722610721207244934, guid: b370911e8b27dd34a9eebc615dce7b33, type: 3}
+    probability: 0.1
     scaleVariation: {x: 1, y: 1}
-  instanceDensity: 0.5
-  minRadius: 50
-  maxRadius: 2000
+  - prefab: {fileID: 7722610721207244934, guid: 2aeac44269944884ca02e50141d0e994, type: 3}
+    probability: 0.075
+    scaleVariation: {x: 1, y: 1}
+  - prefab: {fileID: 3357914726944583175, guid: aae3168a0248728498e2f23bc86f65f1, type: 3}
+    probability: 0.025
+    scaleVariation: {x: 1, y: 1}
+  instanceDensity: 0.333
+  minRadius: 100
+  maxRadius: 3000

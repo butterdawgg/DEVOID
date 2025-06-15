@@ -35,11 +35,14 @@ public class LevelGenerator : MonoBehaviour
                 GameObject obj =
                     Instantiate(entry.prefab, point, randomRotation);
 
-                float randScale = Random.Range(entry.scaleVariation.x,
+                if (entry.scaleVariation.y - entry.scaleVariation.y > 0.1f)
+                {
+                    float randScale = Random.Range(entry.scaleVariation.x,
                     entry.scaleVariation.y);
 
-                obj.transform.localScale =
-                    new Vector3(randScale, randScale, randScale);
+                    obj.transform.localScale =
+                        new Vector3(randScale, randScale, randScale);
+                }
             }
         }
     }
