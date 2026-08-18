@@ -41,15 +41,3 @@ Movement and combat are designed to create a tense, reactive experience where pl
 ## Visual Style
 
 The game uses a **retro neon wireframe aesthetic** combined with modern animation and visual effects. The visual direction is intended to appeal to players interested in science-fiction and retro-inspired games.
-
-## Target Audience
-
-DEVOID is primarily aimed at players approximately **15–30 years old** who are interested in science-fiction, space, and action games. Its fast-paced combat is intended to appeal to younger players, while its retro aesthetic provides additional appeal to players interested in classic arcade-style visuals.
-
-The game has a relatively steep learning curve and is therefore primarily intended for players who enjoy challenging action gameplay.
-
-## Current Development Focus
-
-The current prototype demonstrates the core flying and shooting mechanics. The flying system is intended to be smooth, fast, and responsive, while shooting is designed around satisfying, sequential destruction of enemies.
-
-Potential future development areas include expanding the gameplay loop with levels, either handcrafted or procedurally generated, as well as adding greater variety in enemies, abilities, and power-ups.
